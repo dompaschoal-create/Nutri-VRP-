@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { authClient } from '../lib/auth-client';
 import { syncNutricionista } from '../lib/db';
+import { EkgHeartbeatLine } from './EkgHeartbeatLine';
 import { Activity, Lock, Mail, User, ShieldCheck, ArrowRight, AlertCircle } from 'lucide-react';
 
 interface AuthPageProps {
@@ -89,19 +90,40 @@ export const AuthPage: React.FC<AuthPageProps> = ({ onSuccess }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-white flex flex-col justify-center items-center p-4 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-slate-50 to-amber-50/40 flex flex-col justify-center items-center p-4 sm:p-6">
       <div className="w-full max-w-md">
-        {/* Topo / Logo */}
+        {/* Topo / Logo Nutri VRP@ */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-emerald-600 text-white shadow-lg shadow-emerald-600/20 mb-3">
-            <Activity className="w-8 h-8" />
+          <div className="relative inline-block mb-3">
+            {/* Efeito de brilho pulsante de fundo */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-blue-600 to-amber-400 blur-lg opacity-40 animate-pulse pointer-events-none" />
+            
+            {/* Ícone com animação de flutuação e batimento cardíaco */}
+            <div className="relative inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-700 via-blue-600 to-amber-500 text-white shadow-xl shadow-blue-600/25 border border-white/40 animate-float-icon">
+              <Activity className="w-8 h-8 text-white animate-heartbeat" />
+            </div>
           </div>
-          <h1 className="text-3xl font-bold tracking-tight text-slate-800">Feriani Nutri</h1>
-          <p className="text-sm text-slate-500 mt-1 font-medium">Gestão Nutricional Integrada</p>
+          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 flex items-center justify-center gap-1 animate-logo-wave">
+            <span className="hover:text-blue-600 transition-colors">Nutri</span>
+            <span className="text-blue-600">VRP</span>
+            <span className="text-amber-500 font-black animate-at-shimmer">@</span>
+          </h1>
+
+          {/* Linha simulando o batimento cardíaco (EKG) */}
+          <div className="w-44 mx-auto my-1.5 flex justify-center">
+            <EkgHeartbeatLine width={180} height={24} />
+          </div>
+
+          <p className="text-xs sm:text-sm text-slate-500 font-semibold uppercase tracking-wider">
+            Gestão Nutricional Integrada
+          </p>
         </div>
 
         {/* Card do Formulário */}
-        <div className="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 p-8">
+        <div className="bg-white rounded-3xl shadow-xl shadow-blue-900/5 border border-slate-200/80 p-8 relative overflow-hidden">
+          {/* Barra decorativa com gradiente azul e amarelo */}
+          <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-500 to-amber-400" />
+
           <div className="mb-6">
             <h2 className="text-xl font-bold text-slate-900">
               {isLogin ? 'Acessar sua conta' : 'Criar nova conta'}
@@ -115,7 +137,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ onSuccess }) => {
 
           {error && (
             <div className="mb-5 flex items-start gap-3 p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm">
-              <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5 text-red-500" />
+              <AlertCircle className="w-5 h-5 shrink-0 mt-0.5 text-red-500" />
               <span>{error}</span>
             </div>
           )}
@@ -134,7 +156,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ onSuccess }) => {
                     value={nome}
                     onChange={(e) => setNome(e.target.value)}
                     placeholder="Dra. Maria Silva"
-                    className="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
+                    className="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 transition"
                   />
                 </div>
               </div>
@@ -152,7 +174,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ onSuccess }) => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="nutri@exemplo.com"
-                  className="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
+                  className="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 transition"
                 />
               </div>
             </div>
@@ -169,7 +191,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ onSuccess }) => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="•••••••••"
-                  className="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
+                  className="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 transition"
                 />
               </div>
             </div>
@@ -187,7 +209,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ onSuccess }) => {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="•••••••••"
-                    className="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
+                    className="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 transition"
                   />
                 </div>
               </div>
@@ -196,7 +218,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ onSuccess }) => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full mt-2 flex items-center justify-center gap-2 py-3 px-4 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-70 text-white font-semibold rounded-xl shadow-md shadow-emerald-600/20 transition cursor-pointer"
+              className="w-full mt-2 flex items-center justify-center gap-2 py-3 px-4 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 hover:from-blue-700 hover:to-blue-900 disabled:opacity-70 text-white font-semibold rounded-xl shadow-md shadow-blue-600/25 transition cursor-pointer"
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -220,7 +242,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ onSuccess }) => {
                     setIsLogin(false);
                     setError(null);
                   }}
-                  className="font-semibold text-emerald-600 hover:text-emerald-700 hover:underline cursor-pointer"
+                  className="font-bold text-blue-600 hover:text-blue-700 hover:underline cursor-pointer"
                 >
                   Cadastre-se
                 </button>
@@ -234,7 +256,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ onSuccess }) => {
                     setIsLogin(true);
                     setError(null);
                   }}
-                  className="font-semibold text-emerald-600 hover:text-emerald-700 hover:underline cursor-pointer"
+                  className="font-bold text-blue-600 hover:text-blue-700 hover:underline cursor-pointer"
                 >
                   Faça login
                 </button>
@@ -244,8 +266,8 @@ export const AuthPage: React.FC<AuthPageProps> = ({ onSuccess }) => {
         </div>
 
         {/* Rodapé Seguro */}
-        <div className="mt-6 flex items-center justify-center gap-1.5 text-xs text-slate-400">
-          <ShieldCheck className="w-4 h-4 text-emerald-600" />
+        <div className="mt-6 flex items-center justify-center gap-1.5 text-xs text-slate-500">
+          <ShieldCheck className="w-4 h-4 text-blue-600" />
           <span>Ambiente Seguro e Criptografado</span>
         </div>
       </div>

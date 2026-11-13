@@ -4,8 +4,8 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
-    --primary: 142.1 76.2% 36.3%;
-    --primary-foreground: 355.7 100% 97.3%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
     --border: 214.3 31.8% 91.4%;
@@ -18,4 +18,81 @@ body {
   -webkit-font-smoothing: antialiased;
   background-color: #f8fafc;
   color: #0f172a;
+}
+
+@keyframes float-heartbeat {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.05);
+  }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.15);
+  }
+  40% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.12);
+  }
+}
+
+@keyframes shimmer-gold {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px rgba(245, 158, 11, 0.4));
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.9));
+    transform: scale(1.18) rotate(4deg);
+  }
+}
+
+@keyframes gentle-wave {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+/* Animação Contínua do Eletrocardiograma (Batimento Cardíaco EKG) */
+@keyframes ekg-draw {
+  0% {
+    stroke-dashoffset: 400;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.ekg-active-line {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: ekg-draw 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.animate-float-icon {
+  animation: float-heartbeat 3s ease-in-out infinite;
+}
+
+.animate-heartbeat {
+  animation: pulse-subtle 2.2s ease-in-out infinite;
+}
+
+.animate-at-shimmer {
+  display: inline-block;
+  animation: shimmer-gold 2.5s ease-in-out infinite;
+}
+
+.animate-logo-wave {
+  animation: gentle-wave 3s ease-in-out infinite;
 }

@@ -28,16 +28,16 @@ export default function App() {
     checkSession();
   }, []);
 
-  // Visual de carregamento elegante para prevenir telas brancas
+  // Visual de carregamento alinhado ao design Nutri VRP@ (Azul & Amarelo)
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4">
-        <div className="w-14 h-14 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shadow-lg shadow-emerald-600/20 mb-4 animate-bounce">
+        <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-blue-700 via-blue-600 to-amber-500 text-white flex items-center justify-center shadow-lg shadow-blue-600/20 mb-4 animate-bounce">
           <Activity className="w-7 h-7" />
         </div>
         <div className="flex items-center gap-2 text-slate-600 font-medium text-sm">
-          <div className="w-4 h-4 border-2 border-emerald-600 border-t-transparent rounded-full animate-spin" />
-          <span>Carregando Feriani Nutri...</span>
+          <div className="w-4 h-4 border-2 border-blue-600 border-t-amber-400 rounded-full animate-spin" />
+          <span>Carregando Nutri VRP@...</span>
         </div>
       </div>
     );
